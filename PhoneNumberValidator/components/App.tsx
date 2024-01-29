@@ -70,6 +70,15 @@ export const App = ({ context, onChange }: IPCFContext) => {
             </>
           )}
         </Stack>
+        <Stack
+            horizontal
+            verticalAlign="center"
+            horizontalAlign="start"
+            tokens={{
+              childrenGap: 10,
+              padding: 10,
+            }}
+        >
         <PhoneTextField context={context} phoneNumber={phoneNumber} setPhoneNumber={setPhoneNumber} onChange={onChange} setStatus={setStatus} countryCode={countryCode} />
         <IconButton
                   iconProps={callIcon}
@@ -77,6 +86,7 @@ export const App = ({ context, onChange }: IPCFContext) => {
                   aria-label="ClickToCall"
                   href={`tel:${phoneNumber}`}
                 ></IconButton>
+        </Stack>
       </Stack>
     </div>
   )
