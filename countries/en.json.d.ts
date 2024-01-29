@@ -1,5 +1,4 @@
-import { LabelKey } from '../index'
+import { LabelKey } from '../PhoneNumberValidator'
 type Locale = { [key in LabelKey]: string }
-// eslint-disable-next-line no-redeclare
 declare const Locale: Locale
 export default Locale

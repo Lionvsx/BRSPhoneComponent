@@ -1,7 +1,6 @@
 import React = require('react')
-import { IInputs, IOutputs } from './generated/ManifestTypes'
-import { App, IPCFContext } from './components/App'
-import { CountryCode } from 'libphonenumber-js/types'
+import { IInputs, IOutputs } from '../generated/ManifestTypes'
+import { App, IPCFContext } from '../components/App'
 
 export class PhoneNumberValidator implements ComponentFramework.ReactControl<IInputs, IOutputs> {
     private _props: IPCFContext

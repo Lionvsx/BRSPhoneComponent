@@ -40,7 +40,7 @@ export const App = ({ context, onChange }: IPCFContext) => {
     const getCountryCode = async (webAPI: ComponentFramework.WebApi, countryLookup: ComponentFramework.LookupValue[]) => {
       if (countryLookup?.length < 1) setCountryCode(undefined)
       const result: ComponentFramework.WebApi.Entity = await webAPI.retrieveRecord(countryLookup[0].entityType, countryLookup[0].id)
-      setCountryCode(result.neos_countrycode as CountryCode)
+      setCountryCode(result.brs_countrycode as CountryCode)
     }
     getCountryCode(context.webAPI, context.parameters.Country?.raw).then(() => 
     parsePhoneNumberWithError(phoneNumber, countryCode).isValid() || phoneNumber == null ? onChange({ IsValid: true }) : onChange({ IsValid: false }))
