@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest>
-  <control namespace="PhoneNumberValidatorLeo" constructor="PhoneNumberValidator" version="0.0.17" display-name-key="PhoneNumberValidator" description-key="PhoneNumberValidator description" control-type="virtual">
+  <control namespace="PhoneNumberValidator" constructor="PhoneNumberValidator" version="0.0.17" display-name-key="PhoneNumberValidator" description-key="PhoneNumberValidator description" control-type="virtual">
     <type-group name="phone">
       <type>SingleLine.Phone</type>
       <type>SingleLine.Text</type>
