@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest>
+  <control namespace="PhoneNumberValidatorLeo" constructor="PhoneNumberValidator" version="0.0.17" display-name-key="PhoneNumberValidator" description-key="PhoneNumberValidator description" control-type="virtual">
+    <type-group name="phone">
+      <type>SingleLine.Phone</type>
+      <type>SingleLine.Text</type>
+    </type-group>
+    <property name="PhoneNumber" display-name-key="Phone Number" description-key="Phone Number" of-type-group="phone" usage="bound" required="true" />
+    <property name="Country" display-name-key="Country" description-key="Country lookup to get Country Code" of-type="Lookup.Simple" usage="bound" required="false" />
+    <property name="DefaultCountry" display-name-key="Default Country" description-key="Default Country" of-type="Enum" usage="input" required="false">
+      <value name="Argentina" display-name-key="Argentina">AR</value>
+      <value name="Paraguay" display-name-key="Paraguay">PY</value>
+      <value name="Uruguay" display-name-key="Uruguay">UY</value>
+      <value name="USA" display-name-key="United States of America">US</value>
+      <value name="UnitedKingdom" display-name-key="United Kingdom">GB</value>
+      <value name="Brazil" display-name-key="Brazil">BR</value>
+    </property>
+    <property name="IsValid" display-name-key="IsValid" description-key="" of-type="TwoOptions" usage="bound" required="false" />
+    <resources>
+      <code path="index.ts" order="1" />
+      <css path="css/style.css" order="2" />
+      <platform-library name="React" version="16.8.6" />
+      <platform-library name="Fluent" version="8.29.0" />
+    </resources>
+    <feature-usage>
+      <uses-feature name="Utility" required="true" />
+      <uses-feature name="WebAPI" required="true" />
+    </feature-usage>
+  </control>
+</manifest>
