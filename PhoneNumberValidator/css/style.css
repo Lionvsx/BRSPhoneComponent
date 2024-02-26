@@ -131,3 +131,5 @@
     opacity: 1;
     color: var(--PhoneInputCountrySelectArrow-color--focus);
 }
+
+.iti__flag {background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.1.0/img/flags.png");}

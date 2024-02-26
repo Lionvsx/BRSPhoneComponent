@@ -2,11 +2,14 @@ import * as React from 'react'
 import { useEffect, useState } from 'react'
 import { IInputs } from '../generated/ManifestTypes'
 
+
 import { CountryCode, E164Number, parsePhoneNumberWithError } from 'libphonenumber-js'
 import { FontIcon, Stack, mergeStyleSets, mergeStyles, IconButton, IIconProps } from '@fluentui/react'
 
 import PhoneTextField from './PhoneTextField'
 import ReactCountryFlag from 'react-country-flag'
+import CountrySelector from "./CountrySelector";
+import LookupValue = ComponentFramework.LookupValue;
 
 export interface IPCFContext {
   context: ComponentFramework.Context<IInputs>
@@ -33,18 +36,30 @@ export const App = ({ context, onChange }: IPCFContext) => {
   const [status, setStatus] = useState<string>(STATUS_ICON.Valid)
   const [phoneNumber, setPhoneNumber] = useState(context.parameters.PhoneNumber.raw as E164Number)
   const [countryCode, setCountryCode] = useState<CountryCode | undefined>(undefined)
+    const [selectedCountry, setSelectedCountry] = useState<CountryCode>('FR');
 
-  const callIcon: IIconProps = { iconName: "Phone" };
+
+    const callIcon: IIconProps = { iconName: "Phone" };
+    const phoneRef: string = "tel:" + phoneNumber;
 
   useEffect(() => {
     const getCountryCode = async (webAPI: ComponentFramework.WebApi, countryLookup: ComponentFramework.LookupValue[]) => {
       if (countryLookup?.length < 1) setCountryCode(undefined)
       const result: ComponentFramework.WebApi.Entity = await webAPI.retrieveRecord(countryLookup[0].entityType, countryLookup[0].id)
       setCountryCode(result.brs_countrycode as CountryCode)
+        setSelectedCountry(result.brs_countrycode as CountryCode)
     }
-    getCountryCode(context.webAPI, context.parameters.Country?.raw).then(() => 
-    parsePhoneNumberWithError(phoneNumber, countryCode).isValid() || phoneNumber == null ? onChange({ IsValid: true }) : onChange({ IsValid: false }))
+
+    getCountryCode(context.webAPI, context.parameters.Country?.raw).then(() =>
+        parsePhoneNumberWithError(phoneNumber, countryCode).isValid() || phoneNumber == null ? onChange({ IsValid: true }) : onChange({ IsValid: false })
+    )
+
   }, [context.parameters.Country])
+
+    const handleCountryChange = (newCountryCode: CountryCode) => {
+        setSelectedCountry(newCountryCode);
+        // You may need to re-validate the phone number here with the new country code
+    };
 
   return (
     <div style={{ width: '100%' }}>
@@ -63,6 +78,8 @@ export const App = ({ context, onChange }: IPCFContext) => {
             padding: 10,
           }}
         >
+            {/* Country Selector Dropdown */}
+            <CountrySelector selectedCountry={selectedCountry} onCountryChange={handleCountryChange} />
           {countryCode && (
             <>
               <ReactCountryFlag countryCode={countryCode as string} svg />
@@ -79,7 +96,9 @@ export const App = ({ context, onChange }: IPCFContext) => {
               padding: 10,
             }}
         >
-        <PhoneTextField context={context} phoneNumber={phoneNumber} setPhoneNumber={setPhoneNumber} onChange={onChange} setStatus={setStatus} countryCode={countryCode} />
+        <Stack.Item>
+            <PhoneTextField context={context} phoneNumber={phoneNumber} setPhoneNumber={setPhoneNumber} onChange={onChange} setStatus={setStatus} countryCode={countryCode} />
+        </Stack.Item>
         <IconButton
                   iconProps={callIcon}
                   title="Click To Call"

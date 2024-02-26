@@ -21,7 +21,7 @@ const textFieldStyle = (props: ITextFieldStyleProps): Partial<ITextFieldStyles> 
         border: 'none',
       },
       field: {
-        fontWeight: 600,
+        fontWeight: 400,
         color: 'rgb(51, 51, 51)',
         backgroundColor: 'transparent',
         ':hover': {
@@ -52,7 +52,7 @@ const textFieldStyle = (props: ITextFieldStyleProps): Partial<ITextFieldStyles> 
           },
         },
         field: {
-          fontWeight: 600,
+          fontWeight: 400,
           ':hover': {
             fontWeight: 400,
             border: '1px solid rgb(102, 102, 102)',
