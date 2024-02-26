@@ -4,7 +4,6 @@
 /node_modules
 
 # generated directory
-generated
 
 # output directory
 /out
